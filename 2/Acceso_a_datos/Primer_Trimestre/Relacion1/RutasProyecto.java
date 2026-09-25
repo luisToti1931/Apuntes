@@ -11,6 +11,11 @@ public class RutasProyecto {
             System.out.println("Ruta archivo: " + archivo.toAbsolutePath());
             System.out.println("Ruta copias: " + copias.toAbsolutePath());
 
+            System.out.println();
+
+            System.out.println("Ruta relativa 1: " + carpeta);
+            System.out.println("Ruta relativa 2: " + archivo);
+            System.out.println("Ruta relativa 3: " + copias);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
