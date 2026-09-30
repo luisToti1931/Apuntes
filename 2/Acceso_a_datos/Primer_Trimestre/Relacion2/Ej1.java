@@ -23,7 +23,7 @@ public class Ej1 {
                         String titulo = campos[1];
                         String plataforma = campos[2];
 
-                        System.out.println("[" + id + "]" + titulo + " - " + plataforma);
+                        System.out.println("[" + id + "] " + titulo + " - " + plataforma);
 
                     } catch (NumberFormatException e) {
                         System.err.println(e.getMessage());
