@@ -1,7 +1,7 @@
 producto = "Teclado"
 cantidad_teclados = 4
-precioTeclado = 25.50
+precio_teclado = 25.50
 
-subtotal = cantidad_teclados * precioTeclado
+subtotal = cantidad_teclados * precio_teclado
 
 print(f"El subtotal debe ser {subtotal:.2f} EUR")
