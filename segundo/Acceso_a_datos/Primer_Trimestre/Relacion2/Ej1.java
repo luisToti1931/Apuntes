@@ -1,4 +1,4 @@
-package Relacion2;
+package segundo.Acceso_a_datos.Primer_Trimestre.Relacion2;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
