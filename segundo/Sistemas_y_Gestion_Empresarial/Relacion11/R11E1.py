@@ -44,50 +44,57 @@ def guardarCSV(lista):
 
 
 # MAIN----------------
-lista_productos = []
-lista_productos.append(
-    {"categoria": "Electrodoméstico", "nombre": "Lavadora", "stock": 10}
-)
-lista_productos.append({"categoria": "Verdura", "nombre": "Lenteja", "stock": 7})
-lista_productos.append({"categoria": "Electrónica", "nombre": "Iphone", "stock": 9})
+def main():
 
-opcion = 0
-while opcion != -1:
-    print(
-        "\nOp-1: Salir\nOp1: listar\nOp2: Añadir\nOp3: Modificar\nOp4: Buscar por nombre\nOp5: Guardar en CSV"
+    lista_productos = []
+
+    lista_productos.append(
+        {"categoria": "Electrodoméstico", "nombre": "Lavadora", "stock": 10}
     )
-    opcion = int(input(f"Opcion: "))
-    if opcion == -1:
-        print("Saliendo del programa")
-    elif opcion == 1:
-        print(listarProductos(lista_productos))
-    elif opcion == 2:
-        categoria = input(f"Introduce la categoria: ")
-        nombre = input(f"Introduce el nombre: ").strip()
-        stock = int(input(f"Introduce el stock: "))
-        aniadirProducto(lista_productos, nombre, categoria, stock)
-        print(f"Producto añadido correctamente")
-    elif opcion == 3:
-        nombre = input(f"Introduce el nombre: ").strip()
-        stock = int(input(f"Modifica el stock: "))
-        if modificarStock(lista_productos, stock, nombre):
-            print(f"Modificado correctamente")
-        else:
-            print(f"error, no existe en el inventario ese producto")
+    lista_productos.append({"categoria": "Verdura", "nombre": "Lenteja", "stock": 7})
+    lista_productos.append({"categoria": "Electrónica", "nombre": "Iphone", "stock": 9})
 
-    elif opcion == 4:
-        nombre = (input(f"Introduce el nombre que buscas: ")).strip()
-        resultado = encontrarProducto(nombre, lista_productos)
-
-        if encontrarProducto:
-            print(
-                f"Encontrado: {resultado['nombre']} | Categoría: {resultado['categoria']} | Stock: {resultado['stock']}"
+    opcion = 0
+    while opcion != -1:
+        print(
+            "\nOp-1: Salir\nOp1: listar\nOp2: Añadir\nOp3: Modificar\nOp4: Buscar por nombre\nOp5: Guardar en CSV"
             )
-        else:
-            print("No se ha encontrado ningun producto")
+        opcion = int(input(f"Opcion: "))
+        if opcion == -1:
+            print("Saliendo del programa")
+        elif opcion == 1:
+            print(listarProductos(lista_productos))
+        elif opcion == 2:
+            categoria = input(f"Introduce la categoria: ")
+            nombre = input(f"Introduce el nombre: ").strip()
+            stock = int(input(f"Introduce el stock: "))
+            aniadirProducto(lista_productos, nombre, categoria, stock)
+            print(f"Producto añadido correctamente")
+        elif opcion == 3:
+            nombre = input(f"Introduce el nombre: ").strip()
+            stock = int(input(f"Modifica el stock: "))
+            if modificarStock(lista_productos, stock, nombre):
+                print(f"Modificado correctamente")
+            else:
+                print(f"error, no existe en el inventario ese producto")
 
-    elif opcion == 5:
-        if guardarCSV(lista_productos):
-            print("Guardado en CSV")
-        else:
-            print("Ha habido un error")
+        elif opcion == 4:
+            nombre = (input(f"Introduce el nombre que buscas: ")).strip()
+            resultado = encontrarProducto(nombre, lista_productos)
+
+            if encontrarProducto:
+                print(
+                    f"Encontrado: {resultado['nombre']} | Categoría: {resultado['categoria']} | Stock: {resultado['stock']}"
+                )
+            else:
+                print("No se ha encontrado ningun producto")
+
+        elif opcion == 5:
+            if guardarCSV(lista_productos):
+                print("Guardado en CSV")
+            else:
+                print("Ha habido un error")
+
+
+if __name__ == "__main__":
+    main()
