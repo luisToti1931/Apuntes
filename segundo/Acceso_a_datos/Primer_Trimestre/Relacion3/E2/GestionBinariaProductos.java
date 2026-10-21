@@ -1,5 +1,4 @@
-package segundo.Acceso_a_datos.Relacion3.E2;
-import segundo.Acceso_a_datos.Relacion3.E1.Producto;
+package segundo.Acceso_a_datos.Primer_Trimestre.Relacion3.E2;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
+
+import segundo.Acceso_a_datos.Primer_Trimestre.Relacion3.E1.Producto;
 
 public class GestionBinariaProductos {
     public static void main(String[] args) {

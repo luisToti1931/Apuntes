@@ -1,4 +1,4 @@
-package segundo.Acceso_a_datos.Relacion3.E1;
+package segundo.Acceso_a_datos.Primer_Trimestre.Relacion3.E1;
 
 import java.io.Serializable;
 
