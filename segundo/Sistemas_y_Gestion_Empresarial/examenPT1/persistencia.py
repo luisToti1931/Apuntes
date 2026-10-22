@@ -9,8 +9,8 @@ CAMPOS = ["codigo", "propietario", "modelo", "valor", "estado"]
 def cargar_bicicletas(ruta):
     """Lee bicicletas del CSV, con su valor numérico y su estado."""
     bicicletas = []
-    with open(ruta, "r", encoding="utf-8", newline="") as archivo:
-        lector = csv.DictReader(archivo)
+    with open(ruta, "r", encoding="utf-8-sig", newline="") as archivo:
+        lector = csv.DictReader(archivo, delimiter="\t")
         if lector.fieldnames != CAMPOS:
             raise ValueError("Las columnas del CSV no tienen el formato esperado")
 
