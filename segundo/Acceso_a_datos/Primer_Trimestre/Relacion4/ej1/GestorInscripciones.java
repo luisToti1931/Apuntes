@@ -43,7 +43,6 @@ public class GestorInscripciones {
                 int plazas = Integer.parseInt(partes[3].trim());
 
                 Inscripcion inscripcion = new Inscripcion(id, persona, taller, plazas);
-
                 if (!esValida(inscripcion) || !idsVistos.add(id)) {
                     throw new IOException("Datos invalidos o ids duplicados");
                 }
@@ -54,7 +53,6 @@ public class GestorInscripciones {
 
             }
         }
-
         return inscripciones;
     }
 
@@ -99,7 +97,7 @@ public class GestorInscripciones {
 
         int index = lista.indexOf(inscripcion);
         Inscripcion inscripcionActualizada = new Inscripcion(inscripcion.getId(), inscripcion.getPersona(),
-                inscripcion.getTaller(), inscripcion.getPlazas());
+                inscripcion.getTaller(), plazas);
 
         if (!esValida(inscripcionActualizada)) {
             return false;

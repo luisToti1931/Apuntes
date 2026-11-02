@@ -1,13 +1,15 @@
 package segundo.Acceso_a_datos.Primer_Trimestre.Relacion4.ej1;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Path archivo = Path.of("datos", "inscripciones.csv");
+        Path archivo = Path.of("segundo", "Acceso_a_datos", "Primer_Trimestre",
+                "Relacion4", "ej1", "datos", "inscripciones.csv");
         try (Scanner teclado = new Scanner(System.in)) {
             int opcion = -1;
             while (opcion != 0) {
