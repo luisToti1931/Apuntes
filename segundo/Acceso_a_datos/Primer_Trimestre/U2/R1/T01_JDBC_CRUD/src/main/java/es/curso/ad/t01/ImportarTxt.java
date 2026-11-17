@@ -1,4 +1,4 @@
-package segundo.Acceso_a_datos.Primer_Trimestre.U2.R1.T01_JDBC_CRUD.src.main.java.es.curso.ad.t01;
+package es.curso.ad.t01;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -13,15 +13,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Importación completa: primero valida el TXT y después hace INSERT transaccional. */
+/**
+ * Importación completa: primero valida el TXT y después hace INSERT
+ * transaccional.
+ */
 public class ImportarTxt {
-    public record ClubTxt(int id, String nombre, String ciudad) { }
+    public record ClubTxt(int id, String nombre, String ciudad) {
+    }
 
     public List<ClubTxt> validar(Path archivo) throws IOException {
         List<ClubTxt> clubes = new ArrayList<>();
         Set<Integer> ids = new HashSet<>();
         for (String linea : Files.readAllLines(archivo, StandardCharsets.UTF_8)) {
-            if (linea.isBlank()) continue;
+            if (linea.isBlank())
+                continue;
             String[] campos = linea.split(";", -1);
             if (campos.length != 3 || campos[1].isBlank() || campos[2].isBlank()) {
                 throw new IllegalArgumentException("Línea incorrecta: " + linea);
@@ -46,7 +51,7 @@ public class ImportarTxt {
             conexion.setAutoCommit(false);
             try (PreparedStatement sentencia = conexion.prepareStatement(
                     "INSERT INTO club(id, nombre, ciudad, presupuesto) " +
-                    "VALUES (?, ?, ?, ?)")) {
+                            "VALUES (?, ?, ?, ?)")) {
                 for (ClubTxt club : validados) {
                     sentencia.setInt(1, club.id());
                     sentencia.setString(2, club.nombre());
