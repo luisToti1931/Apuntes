@@ -151,4 +151,31 @@ public class ClubDao {
         }
         return resumenes;
     }
+
+    public boolean borrarControlado(int id) throws SQLException {
+        String sql = "DELETE FROM club WHERE id = ? " + "AND NOT EXISTS (SELECT 1 FROM jugador WHERE club_id = ?) "
+                + "AND NOT EXISTS (SELECT 1 FROM movimiento " + "WHERE club_origen_id = ? OR club_destino_id = ?)";
+
+        try (Connection conexion = Conexion.abrir();
+                PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            sentencia.setInt(1, id);
+            sentencia.setInt(2, id);
+            sentencia.setInt(3, id);
+            sentencia.setInt(4, id);
+            return sentencia.executeUpdate() == 1;
+        }
+    }
+
+    public boolean aumentarPresupuesto(int id, BigDecimal cantidad) throws SQLException {
+        if (cantidad == null || cantidad.signum() <= 0) {
+            throw new IllegalArgumentException();
+        }
+        String sql = "UPDATE club SET presupuesto = presupuesto + ? WHERE id = ?";
+        try (Connection conexion = Conexion.abrir();
+                PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            sentencia.setBigDecimal(1, cantidad);
+            sentencia.setInt(2, id);
+            return sentencia.executeUpdate() == 1;
+        }
+    }
 }

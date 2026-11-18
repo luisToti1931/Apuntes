@@ -19,13 +19,13 @@ public class Main {
             }
             System.out.println("\nINSERTAR JUGADOR");
 
-            int idJugador = dao.insertarJugador("Jorge Pascual", 91, 1);
+            int idJugador = dao.insertarJugador("Jorge Pascual", 94, 1);
 
             System.out.println("Jugador creado con id: " + idJugador);
 
             System.out.println("\nRESUMEN DE CLUBES");
 
-            for(ResumenClub resumen : dao.resumenClubes()){
+            for (ResumenClub resumen : dao.resumenClubes()) {
                 System.out.println(resumen);
             }
 
@@ -35,7 +35,8 @@ public class Main {
             System.out.println("Buscado: " + dao.buscar(id).orElseThrow());
             System.out.println("Actualizado: " + dao.cambiarCiudad(id, "Jaén"));
             System.out.println("Tras cambiar: " + dao.buscar(id).orElseThrow());
-            System.out.println("Borrado: " + dao.borrar(id));
+            // System.out.println("Borrado: " + dao.borrar(id));
+            System.out.println("Borrado controlado: " + dao.borrarControlado(id));
             System.out.println("¿Sigue existiendo? " + dao.buscar(id).isPresent());
         } catch (SQLException e) {
             System.err.println("Error de base de datos: " + e.getMessage());
