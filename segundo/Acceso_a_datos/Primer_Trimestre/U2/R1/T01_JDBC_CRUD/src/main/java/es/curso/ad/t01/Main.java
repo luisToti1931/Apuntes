@@ -3,6 +3,8 @@ package es.curso.ad.t01;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
+import es.curso.ad.t01.ClubDao.ResumenClub;
+
 public class Main {
     public static void main(String[] args) {
         ClubDao dao = new ClubDao();
@@ -10,6 +12,21 @@ public class Main {
             System.out.println("CLUBES INICIALES");
             for (Club club : dao.listar()) {
                 System.out.println(club);
+            }
+            System.out.println("\nCLUBES DE GRANADA");
+            for (Club club : dao.listarPorCiudad("Granada")) {
+                System.out.println(club);
+            }
+            System.out.println("\nINSERTAR JUGADOR");
+
+            int idJugador = dao.insertarJugador("Jorge Pascual", 91, 1);
+
+            System.out.println("Jugador creado con id: " + idJugador);
+
+            System.out.println("\nRESUMEN DE CLUBES");
+
+            for(ResumenClub resumen : dao.resumenClubes()){
+                System.out.println(resumen);
             }
 
             String nombreTemporal = "Club de prueba JDBC";

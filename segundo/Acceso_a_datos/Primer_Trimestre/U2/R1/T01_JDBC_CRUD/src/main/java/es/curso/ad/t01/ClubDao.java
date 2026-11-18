@@ -1,4 +1,5 @@
 package es.curso.ad.t01;
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import es.curso.ad.t01.Conexion;
 
 public class ClubDao {
     public int insertar(String nombre, String ciudad,
@@ -96,11 +99,56 @@ public class ClubDao {
                             filas.getInt("id"),
                             filas.getString("nombre"),
                             filas.getString("ciudad"),
-                            filas.getBigDecimal("presupuesto")
-                        ));
+                            filas.getBigDecimal("presupuesto")));
                 }
             }
         }
         return clubes;
+    }
+
+    public int insertarJugador(String nombre, int dorsal, int clubId) throws SQLException {
+
+        String sql = "INSERT INTO jugador (nombre, dorsal, club_id) VALUES (?, ?, ?)";
+
+        try (Connection conexion = Conexion.abrir();
+                PreparedStatement sentencia = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            sentencia.setString(1, nombre);
+            sentencia.setInt(2, dorsal);
+            sentencia.setInt(3, clubId);
+
+            sentencia.executeUpdate();
+            // aqui se recuperan las claves que genera automaticamente mysql
+            try (ResultSet claves = sentencia.getGeneratedKeys()) {
+                // aqui comprobamos si hay clave generada y si avanza te devuelve el id generado
+                if (claves.next()) {
+                    return claves.getInt(1);
+                }
+            }
+        }
+        // si no hay clave generada te devuelve -1 (no se ha podido recuperar el id)
+        return -1;
+    }
+
+    public record ResumenClub(int id, String nombre, long totalJugadores) {
+    }
+
+    public List<ResumenClub> resumenClubes() throws SQLException {
+        String sql = "SELECT c.id, c.nombre, COUNT(j.id) AS totalJugadores"
+                + " FROM club c LEFT JOIN jugador j on c.id = j.club_id" + " GROUP BY c.id, c.nombre";
+
+        List<ResumenClub> resumenes = new ArrayList<>();
+
+        try (Connection conexion = Conexion.abrir();
+                PreparedStatement sentencia = conexion.prepareStatement(sql);
+                ResultSet filas = sentencia.executeQuery()) {
+            while (filas.next()) {
+                resumenes.add(new ResumenClub(
+                        filas.getInt("id"),
+                        filas.getString("nombre"),
+                        filas.getLong("totalJugadores")));
+            }
+        }
+        return resumenes;
     }
 }
